@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Particle Simulation");
 
         StackPane root = new StackPane();
-        Canvas canvas = new Canvas(400, 400);
+        Canvas canvas = new Canvas(800, 600);
         root.getChildren().add(canvas);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -29,9 +29,10 @@ public class HelloApplication extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                particle.update();
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                particle.update();
                 particle.display(gc);
+
             }
         }.start();
         stage.setScene(scene);
