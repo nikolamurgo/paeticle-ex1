@@ -18,29 +18,39 @@ public class HelloApplication extends Application {
 
     ArrayList<Particle> particles = new ArrayList<Particle>();
 
+    private int pps = 3000;
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Particle Effect"); // gui title
 
         StackPane root = new StackPane();
-        Canvas canvas = new Canvas(800, 600); // canvas size
+        Canvas canvas = new Canvas(800, 800); // canvas size
         root.getChildren().add(canvas);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-//        Particle particle = new Particle(new Point2D(400, 100));
-        for (int i=0; i<10; i++){
-            particles.add(new Particle());
-        }
-        Scene scene = new Scene(root,800,600,Color.WHITE);
+        Scene scene = new Scene(root,800,800,Color.BLACK);
+
 
         new AnimationTimer() {
             @Override
             public void handle(long now) {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                for (Particle p : particles){
+
+                int pts = pps/60;
+                for (int i=0; i< pts; i++){
+                    particles.add(new Particle());
+                }
+
+                for (int i=particles.size()-1; i >= 0; i--){
+                    Particle p = particles.get(i);
                     p.update();
                     p.display(gc);
+
+                    if (p.killParticle()){
+                        particles.remove(i);
+                    }
                 }
 
             }
