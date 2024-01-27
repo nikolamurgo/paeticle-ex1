@@ -1,9 +1,7 @@
 package exampple.particlesexerciseone;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.PathTransition;
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +23,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Particle Effect"); // gui title
 
         StackPane root = new StackPane();
-        Canvas canvas = new Canvas(800, 800); // canvas size
+        Canvas canvas = new Canvas(800, 600); // canvas size
         root.getChildren().add(canvas);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -36,7 +34,8 @@ public class HelloApplication extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                gc.setFill(Color.BLACK);
+                gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 int pts = pps/60;
                 for (int i=0; i< pts; i++){

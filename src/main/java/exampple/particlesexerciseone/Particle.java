@@ -11,7 +11,7 @@ public class Particle {
     private double lifespan=1.0; // for transparency and killing particle
 
     public Particle() {
-        location = new Point2D(400,600);
+        location = new Point2D(400,450);
         acceleration = new Point2D(0,-Math.random()*0.03);
 
         double rdX = Math.random()*2-1;
@@ -23,7 +23,7 @@ public class Particle {
     public void update(){
         velocity = velocity.add(acceleration);
         location = location.add(velocity);
-        lifespan -=0.008;
+        lifespan -= 0.008;
         if (lifespan <= 0){
             lifespan =0;
         }
@@ -41,7 +41,6 @@ public class Particle {
     public void display(GraphicsContext gc) {
         gc.setFill(Color.color(1,1,1, lifespan)); // set color of particle and alpha
         gc.fillOval(location.getX(),location.getY(),15,20); // size of particle
-//        gc.strokeOval(location.getX(),location.getY(),20,20);
-//        gc.setStroke(Color.BLACK);
+
     }
 }
